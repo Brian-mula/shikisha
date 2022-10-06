@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/widgets/text_widget.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,19 +12,27 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Container(
         width: double.maxFinite,
         height: double.maxFinite,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/login1.png'),
+                image: NetworkImage(
+                    'https://cdn.pixabay.com/photo/2018/01/21/19/57/tree-3097419__340.jpg'),
                 fit: BoxFit.cover)),
         child: Padding(
           padding: const EdgeInsets.only(top: 400, left: 10, right: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [Text("Login")],
+            children: [
+              TextWidget(
+                text: "Login",
+                textStyle:
+                    theme.textTheme.headline3!.copyWith(color: Colors.white),
+              )
+            ],
           ),
         ),
       ),

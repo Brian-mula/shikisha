@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shikisha/widgets/login_page.dart';
+import 'package:shikisha/views/login_page.dart';
 
 void main() {
   runApp(const MyApp());
