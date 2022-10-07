@@ -4,14 +4,14 @@ import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 import 'package:shikisha/widgets/transparent_container.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUp extends ConsumerStatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _SignUpState extends ConsumerState<SignUp> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   @override
@@ -35,7 +35,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextWidget(
-                  text: "Login",
+                  text: "SignUp",
                   textStyle:
                       theme.textTheme.headline3!.copyWith(color: Colors.white),
                 ),
@@ -80,23 +80,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   .copyWith(color: Colors.white),
                             )),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: const TextWidget(text: "Forget password")),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/signUp');
-                              },
-                              child: TextWidget(
-                                text: "Don't have account?",
-                                textStyle: theme.textTheme.headline6!
-                                    .copyWith(color: Colors.blue.shade600),
-                              ))
-                        ],
-                      )
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/");
+                          },
+                          child: TextWidget(
+                            text: "Already have account ??",
+                            textStyle: theme.textTheme.headline6!
+                                .copyWith(color: Colors.blue.shade600),
+                          ))
                     ],
                   ),
                 ))

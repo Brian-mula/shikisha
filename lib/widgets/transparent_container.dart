@@ -9,7 +9,7 @@ class TransparentContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
-          color: Colors.white.withOpacity(0.3)),
+          color: Colors.white.withOpacity(0.5)),
       child: widget,
     );
   }

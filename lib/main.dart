@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shikisha/views/login_page.dart';
+import 'package:shikisha/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      initialRoute: '/',
+      onGenerateRoute: ShikishaRoutes.generateRoute,
     );
   }
 }
