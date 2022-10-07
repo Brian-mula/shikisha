@@ -73,7 +73,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.orange.shade900)),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/home");
+                            },
                             child: TextWidget(
                               text: "Continue",
                               textStyle: theme.textTheme.headline6!

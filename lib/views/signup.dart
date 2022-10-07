@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 import 'package:shikisha/widgets/transparent_container.dart';
@@ -29,7 +30,7 @@ class _SignUpState extends ConsumerState<SignUp> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(top: 400, left: 15, right: 15),
+            padding: const EdgeInsets.only(top: 350, left: 15, right: 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,6 +80,15 @@ class _SignUpState extends ConsumerState<SignUp> {
                               textStyle: theme.textTheme.headline6!
                                   .copyWith(color: Colors.white),
                             )),
+                      ),
+                      TextWidget(
+                        text: "Or",
+                        textStyle: theme.textTheme.headline4!
+                            .copyWith(color: Colors.orange.shade800),
+                      ),
+                      SignInButton(
+                        Buttons.Google,
+                        onPressed: () {},
                       ),
                       TextButton(
                           onPressed: () {
