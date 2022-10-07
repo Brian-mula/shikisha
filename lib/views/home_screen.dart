@@ -18,7 +18,9 @@ class HomeScreen extends ConsumerWidget {
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Colors.red.shade600)),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/products");
+                },
                 child: TextWidget(
                   text: "Buyer",
                   textStyle:
