@@ -1,12 +1,26 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
-class ProductDetails extends ConsumerWidget {
+class ProductDetails extends ConsumerStatefulWidget {
   const ProductDetails({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends ConsumerState<ProductDetails> {
+  final List<String> shops = [
+    'Baraton',
+    'Eldoret',
+    'Kisumu',
+    'Nakuru',
+  ];
+  String selectedshop = "Baraton";
+
+  @override
+  Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Container(
@@ -51,7 +65,58 @@ class ProductDetails extends ConsumerWidget {
                       ))
                 ],
               ),
-            )
+            ),
+            DropdownButtonHideUnderline(
+                child: DropdownButton2(
+              isDense: true,
+              hint: TextWidget(
+                text: "Select Shop",
+                textStyle: theme.textTheme.headline6!
+                    .copyWith(fontSize: 18, color: Colors.orange.shade600),
+              ),
+              items: shops
+                  .map((shop) => DropdownMenuItem(
+                      value: shop,
+                      child: TextWidget(
+                        text: shop,
+                        textStyle: theme.textTheme.headline6!
+                            .copyWith(fontSize: 18, color: Colors.black54),
+                      )))
+                  .toList(),
+              value: selectedshop,
+              onChanged: (value) {
+                setState(() {
+                  selectedshop = value as String;
+                });
+              },
+              buttonHeight: 40,
+              buttonWidth: 140,
+              itemHeight: 40,
+            )),
+            const SizedBox(
+              height: 20,
+            ),
+            TextWidget(
+              text: selectedshop,
+              textStyle: theme.textTheme.headline6,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: 250,
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.orange.shade800)),
+                  onPressed: () {},
+                  child: TextWidget(
+                    text: "Pay Deposit",
+                    textStyle: theme.textTheme.headline6!
+                        .copyWith(color: Colors.white),
+                  )),
+            ),
+            const Expanded(flex: 1, child: TextWidget(text: "text"))
           ],
         ),
       ),
