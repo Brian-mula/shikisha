@@ -32,62 +32,69 @@ class Products extends ConsumerWidget {
                     crossAxisCount: 2,
                   ),
                   itemBuilder: (_, int index) {
-                    return Container(
-                      height: 180,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(6),
-                          image: const DecorationImage(
-                              image: NetworkImage(
-                                  'https://cdn.pixabay.com/photo/2015/01/21/14/14/apple-606761__340.jpg'),
-                              fit: BoxFit.cover)),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                              bottom: 10,
-                              left: 2,
-                              child: Container(
-                                  width: 173,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: Column(
-                                    children: [
-                                      TextWidget(
-                                        text: "HP Monitor",
-                                        textStyle: theme.textTheme.headline6!
-                                            .copyWith(
-                                                color: Colors.orange.shade900),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 5),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            TextWidget(
-                                              text: "Ksh. 30000",
-                                              textStyle: theme
-                                                  .textTheme.bodyLarge!
-                                                  .copyWith(
-                                                      color: Colors
-                                                          .orange.shade900),
-                                            ),
-                                            IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(
-                                                  Icons.shopping_cart,
-                                                  color: Colors.orange.shade800,
-                                                  size: 16,
-                                                ))
-                                          ],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/product_details");
+                      },
+                      child: Container(
+                        height: 180,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(6),
+                            image: const DecorationImage(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2015/01/21/14/14/apple-606761__340.jpg'),
+                                fit: BoxFit.cover)),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                bottom: 10,
+                                left: 2,
+                                child: Container(
+                                    width: 173,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(4)),
+                                    child: Column(
+                                      children: [
+                                        TextWidget(
+                                          text: "HP Monitor",
+                                          textStyle: theme.textTheme.headline6!
+                                              .copyWith(
+                                                  color:
+                                                      Colors.orange.shade900),
                                         ),
-                                      )
-                                    ],
-                                  )))
-                        ],
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              TextWidget(
+                                                text: "Ksh. 30000",
+                                                textStyle: theme
+                                                    .textTheme.bodyLarge!
+                                                    .copyWith(
+                                                        color: Colors
+                                                            .orange.shade900),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: Icon(
+                                                    Icons.shopping_cart,
+                                                    color:
+                                                        Colors.orange.shade800,
+                                                    size: 16,
+                                                  ))
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )))
+                          ],
+                        ),
                       ),
                     );
                   }),
