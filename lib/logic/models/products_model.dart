@@ -1,3 +1,20 @@
+class ProductModel {
+  late List<Product> _products;
+  List<Product> get produxts => _products;
+  ProductModel({required produxts}) {
+    _products = produxts;
+  }
+
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    if (json['products'] != null) {
+      _products = <Product>[];
+      json['products'].forEach((v) {
+        produxts.add(Product.fromJson(v));
+      });
+    }
+  }
+}
+
 class Product {
   int? id;
   String? title;
