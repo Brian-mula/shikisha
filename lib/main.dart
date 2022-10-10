@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/views/home_screen.dart';
 import 'package:shikisha/views/login_page.dart';
+import 'package:shikisha/views/product_details.dart';
+import 'package:shikisha/views/products.dart';
+import 'package:shikisha/views/signup.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +22,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      initialRoute: '/',
+      // onGenerateRoute: ShikishaRoutes.generateRoute,
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/signUp': (context) => const SignUp(),
+        '/home': (context) => const HomeScreen(),
+        '/products': (context) => const Products(),
+        '/product_details': (context) => const ProductDetails()
+      },
     );
   }
 }

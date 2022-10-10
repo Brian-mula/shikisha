@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 import 'package:shikisha/widgets/transparent_container.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUp extends ConsumerStatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _SignUpState extends ConsumerState<SignUp> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   @override
@@ -29,13 +30,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.only(top: 400, left: 15, right: 15),
+            padding: const EdgeInsets.only(top: 350, left: 15, right: 15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextWidget(
-                  text: "Login",
+                  text: "SignUp",
                   textStyle:
                       theme.textTheme.headline3!.copyWith(color: Colors.white),
                 ),
@@ -73,32 +74,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.orange.shade900)),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/home");
-                            },
+                            onPressed: () {},
                             child: TextWidget(
                               text: "Continue",
                               textStyle: theme.textTheme.headline6!
                                   .copyWith(color: Colors.white),
                             )),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: const TextWidget(text: "Forget password")),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/signUp');
-                              },
-                              child: TextWidget(
-                                text: "Don't have account?",
-                                textStyle: theme.textTheme.headline6!
-                                    .copyWith(color: Colors.blue.shade600),
-                              ))
-                        ],
-                      )
+                      TextWidget(
+                        text: "Or",
+                        textStyle: theme.textTheme.headline4!
+                            .copyWith(color: Colors.orange.shade800),
+                      ),
+                      SignInButton(
+                        Buttons.Google,
+                        onPressed: () {},
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/");
+                          },
+                          child: TextWidget(
+                            text: "Already have account ??",
+                            textStyle: theme.textTheme.headline6!
+                                .copyWith(color: Colors.blue.shade600),
+                          ))
                     ],
                   ),
                 ))
