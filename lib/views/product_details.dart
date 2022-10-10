@@ -1,10 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/logic/models/products_model.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
 class ProductDetails extends ConsumerStatefulWidget {
-  const ProductDetails({Key? key}) : super(key: key);
+  const ProductDetails({
+    Key? key,
+  }) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ProductDetailsState();
@@ -22,6 +25,9 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+
+    final args = ModalRoute.of(context)!.settings.arguments as Product;
+
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 100),
@@ -34,18 +40,17 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     color: Colors.blue,
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2022/02/20/02/29/projector-7023604__340.jpg"),
-                        fit: BoxFit.cover)),
+                    image: DecorationImage(
+                        image: NetworkImage(args.image!), fit: BoxFit.cover)),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
             TextWidget(
-              text: "Home theater",
-              textStyle: theme.textTheme.headline6,
+              text: args.title!,
+              textStyle:
+                  theme.textTheme.headline6!.copyWith(color: Colors.black54),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
@@ -53,7 +58,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextWidget(
-                    text: "Ksh. 130,00",
+                    text: "Ksh. ${args.price!}",
                     textStyle: theme.textTheme.headline6!
                         .copyWith(color: Colors.orange.shade800),
                   ),

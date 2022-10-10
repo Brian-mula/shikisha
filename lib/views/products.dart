@@ -29,7 +29,7 @@ class Products extends ConsumerWidget {
                 child: products.when(
               data: (product) {
                 return GridView.builder(
-                    itemCount: 10,
+                    itemCount: product.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisSpacing: 10,
@@ -39,16 +39,16 @@ class Products extends ConsumerWidget {
                     itemBuilder: (_, int index) {
                       return GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, "/product_details");
+                          Navigator.pushNamed(context, "/product_details",
+                              arguments: product[index]);
                         },
                         child: Container(
                           height: 180,
                           decoration: BoxDecoration(
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(6),
-                              image: const DecorationImage(
-                                  image: NetworkImage(
-                                      'https://cdn.pixabay.com/photo/2015/01/21/14/14/apple-606761__340.jpg'),
+                              image: DecorationImage(
+                                  image: NetworkImage(product[index].image!),
                                   fit: BoxFit.cover)),
                           child: Stack(
                             children: [
@@ -65,7 +65,12 @@ class Products extends ConsumerWidget {
                                       child: Column(
                                         children: [
                                           TextWidget(
-                                            text: "HP Monitor",
+                                            text: product[index]
+                                                        .title!
+                                                        .length >=
+                                                    16
+                                                ? '${product[index].title!.substring(0, 16)}...'
+                                                : product[index].title!,
                                             textStyle: theme
                                                 .textTheme.headline6!
                                                 .copyWith(
@@ -81,7 +86,8 @@ class Products extends ConsumerWidget {
                                                       .spaceBetween,
                                               children: [
                                                 TextWidget(
-                                                  text: "Ksh. 30000",
+                                                  text:
+                                                      "Ksh. ${product[index].price!}",
                                                   textStyle: theme
                                                       .textTheme.bodyLarge!
                                                       .copyWith(
@@ -108,7 +114,7 @@ class Products extends ConsumerWidget {
                     });
               },
               error: (err, stack) => Text('Error: $err'),
-              loading: () => const CircularProgressIndicator(),
+              loading: () => const Center(child: CircularProgressIndicator()),
             ))
           ],
         ),
