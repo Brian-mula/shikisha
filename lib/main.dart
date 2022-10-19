@@ -4,6 +4,7 @@ import 'package:shikisha/views/home_screen.dart';
 import 'package:shikisha/views/login_page.dart';
 import 'package:shikisha/views/product_details.dart';
 import 'package:shikisha/views/products.dart';
+import 'package:shikisha/views/seller/product_upload.dart';
 import 'package:shikisha/views/signup.dart';
 
 void main() {
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         '/signUp': (context) => const SignUp(),
         '/home': (context) => const HomeScreen(),
         '/products': (context) => const Products(),
-        '/product_details': (context) => const ProductDetails()
+        '/product_details': (context) => const ProductDetails(),
+        '/product_upload': (context) => const ProductUpload()
       },
     );
   }
