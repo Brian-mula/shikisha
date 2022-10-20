@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "549601478533",
+    "project_id": "shikisha-63928",
+    "storage_bucket": "shikisha-63928.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549601478533:android:1922b7af9bbeb98776e6ec",
+        "android_client_info": {
+          "package_name": "com.example.shikisha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549601478533-k41dqrp1l3h1kb8va2u8r4iighm078mr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPnfXi1mLAllCx8hEufZZvzJw04n1rfJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549601478533-k41dqrp1l3h1kb8va2u8r4iighm078mr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "549601478533-jbf14e6gj5bqob4eb80octi7c8rrk9i6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.shikisha"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
