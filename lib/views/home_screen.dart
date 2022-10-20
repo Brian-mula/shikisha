@@ -35,7 +35,9 @@ class HomeScreen extends ConsumerWidget {
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all(Colors.red.shade600)),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/product_upload');
+                },
                 child: TextWidget(
                   text: "Seller",
                   textStyle:

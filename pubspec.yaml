@@ -40,6 +40,10 @@ dependencies:
   flutter_signin_button: ^2.0.0
   dropdown_button2: ^1.8.4
   http: ^0.13.5
+  images_picker: ^1.2.11
+  image_picker: ^0.8.6
+  file_picker: ^5.1.0
+  firebase_core: ^2.0.0
 
 
 dev_dependencies:

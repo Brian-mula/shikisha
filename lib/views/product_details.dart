@@ -63,7 +63,9 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                         .copyWith(color: Colors.orange.shade800),
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
                       icon: Icon(
                         Icons.shopping_cart,
                         color: Colors.orange.shade800,
@@ -108,6 +110,12 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
             const SizedBox(
               height: 20,
             ),
+            Expanded(
+                flex: 1,
+                child: TextWidget(
+                  text: "${args.description}",
+                  textStyle: theme.textTheme.bodyLarge,
+                )),
             SizedBox(
               width: 250,
               child: ElevatedButton(
@@ -121,7 +129,6 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                         .copyWith(color: Colors.white),
                   )),
             ),
-            const Expanded(flex: 1, child: TextWidget(text: "text"))
           ],
         ),
       ),

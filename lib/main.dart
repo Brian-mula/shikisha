@@ -1,12 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/views/cart_screen.dart';
 import 'package:shikisha/views/home_screen.dart';
 import 'package:shikisha/views/login_page.dart';
 import 'package:shikisha/views/product_details.dart';
 import 'package:shikisha/views/products.dart';
+import 'package:shikisha/views/seller/product_upload.dart';
+import 'package:shikisha/views/seller/product_view.dart';
 import 'package:shikisha/views/signup.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -29,7 +39,10 @@ class MyApp extends StatelessWidget {
         '/signUp': (context) => const SignUp(),
         '/home': (context) => const HomeScreen(),
         '/products': (context) => const Products(),
-        '/product_details': (context) => const ProductDetails()
+        '/product_details': (context) => const ProductDetails(),
+        '/product_upload': (context) => const ProductUpload(),
+        '/product_view': (context) => const ProductView(),
+        '/cart': (context) => const CartScreen()
       },
     );
   }
