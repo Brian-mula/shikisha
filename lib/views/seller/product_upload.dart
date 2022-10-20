@@ -150,7 +150,9 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                               Colors.orange.shade900)),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/product_view');
+                      },
                       child: TextWidget(
                         text: "Confirm",
                         textStyle: theme.textTheme.headline6!
