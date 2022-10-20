@@ -63,7 +63,9 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                         .copyWith(color: Colors.orange.shade800),
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
                       icon: Icon(
                         Icons.shopping_cart,
                         color: Colors.orange.shade800,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/views/cart_screen.dart';
 import 'package:shikisha/views/home_screen.dart';
 import 'package:shikisha/views/login_page.dart';
 import 'package:shikisha/views/product_details.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         '/products': (context) => const Products(),
         '/product_details': (context) => const ProductDetails(),
         '/product_upload': (context) => const ProductUpload(),
-        '/product_view': (context) => const ProductView()
+        '/product_view': (context) => const ProductView(),
+        '/cart': (context) => const CartScreen()
       },
     );
   }
