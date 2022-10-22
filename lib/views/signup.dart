@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:shikisha/logic/providers/auth_provider.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 import 'package:shikisha/widgets/transparent_container.dart';
 
-class SignUp extends ConsumerStatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUp extends ConsumerWidget {
+  const SignUp({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpState();
-}
-
-class _SignUpState extends ConsumerState<SignUp> {
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    final auth = ref.watch(authenticationProvider);
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Container(
@@ -54,7 +51,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                         height: 13,
                       ),
                       CustomeInput(
-                          controller: _emailController,
+                          controller: emailController,
                           icon: Icons.email,
                           labelText: "Email",
                           inputType: TextInputType.emailAddress),
@@ -62,7 +59,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                         height: 10,
                       ),
                       CustomeInput(
-                        controller: _passwordController,
+                        controller: passwordController,
                         icon: Icons.lock,
                         labelText: "Password",
                         inputType: TextInputType.text,
@@ -74,7 +71,10 @@ class _SignUpState extends ConsumerState<SignUp> {
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.orange.shade900)),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await auth.signUp(emailController.text,
+                                  passwordController.text, context);
+                            },
                             child: TextWidget(
                               text: "Continue",
                               textStyle: theme.textTheme.headline6!
@@ -88,7 +88,9 @@ class _SignUpState extends ConsumerState<SignUp> {
                       ),
                       SignInButton(
                         Buttons.Google,
-                        onPressed: () {},
+                        onPressed: () async {
+                          await auth.signInWithGoogle(context);
+                        },
                       ),
                       TextButton(
                           onPressed: () {

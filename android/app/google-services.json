@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "549601478533-nr70r0o6fv9uddhrjcvipn484a2gn279.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shikisha",
+            "certificate_hash": "1497645ec4fd96fbdee1293ae9e3b4d68d19f77f"
+          }
+        },
+        {
           "client_id": "549601478533-k41dqrp1l3h1kb8va2u8r4iighm078mr.apps.googleusercontent.com",
           "client_type": 3
         }
