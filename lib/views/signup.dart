@@ -88,7 +88,9 @@ class SignUp extends ConsumerWidget {
                       ),
                       SignInButton(
                         Buttons.Google,
-                        onPressed: () {},
+                        onPressed: () async {
+                          await auth.signInWithGoogle(context);
+                        },
                       ),
                       TextButton(
                           onPressed: () {
