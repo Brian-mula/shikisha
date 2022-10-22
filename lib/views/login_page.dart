@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/logic/providers/auth_provider.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 import 'package:shikisha/widgets/transparent_container.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends ConsumerWidget {
+  const LoginPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends ConsumerState<LoginPage> {
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    final auth = ref.watch(authenticationProvider);
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: Container(
@@ -53,7 +50,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         height: 13,
                       ),
                       CustomeInput(
-                          controller: _emailController,
+                          controller: emailController,
                           icon: Icons.email,
                           labelText: "Email",
                           inputType: TextInputType.emailAddress),
@@ -61,7 +58,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         height: 10,
                       ),
                       CustomeInput(
-                        controller: _passwordController,
+                        controller: passwordController,
                         icon: Icons.lock,
                         labelText: "Password",
                         inputType: TextInputType.text,
@@ -73,8 +70,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.orange.shade900)),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/home");
+                            onPressed: () async {
+                              await auth.signin(emailController.text,
+                                  passwordController.text, context);
                             },
                             child: TextWidget(
                               text: "Continue",

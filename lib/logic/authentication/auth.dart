@@ -13,12 +13,25 @@ class Authentication {
       String email, String password, BuildContext context) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const TextWidget(text: "Error occured"),
-                content: TextWidget(text: e.toString()),
+                title: TextWidget(
+                  text: "Error occured",
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .headline6!
+                      .copyWith(color: Colors.red),
+                ),
+                content: TextWidget(
+                  text: e.toString(),
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: Colors.red.shade500),
+                ),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -36,16 +49,23 @@ class Authentication {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      Navigator.pushNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const TextWidget(text: "Error occured"),
+                title: TextWidget(
+                  text: "Error occured",
+                  textStyle: Theme.of(context)
+                      .textTheme
+                      .headline6!
+                      .copyWith(color: Colors.red),
+                ),
                 content: TextWidget(
                   text: e.toString(),
                   textStyle: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .bodyLarge!
                       .copyWith(color: Colors.red.shade600),
                 ),
                 actions: [
