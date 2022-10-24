@@ -5,3 +5,7 @@ import 'package:shikisha/logic/repos/products_repo.dart';
 final productsProvider = FutureProvider<List<Product>>((ref) async {
   return ProductsRepo().getAllProducts();
 });
+
+final productProvider = ChangeNotifierProvider<ProductsRepo>((ref) {
+  return ProductsRepo();
+});

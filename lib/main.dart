@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/views/auth_checker.dart';
 import 'package:shikisha/views/cart_screen.dart';
 import 'package:shikisha/views/home_screen.dart';
 import 'package:shikisha/views/login_page.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       // onGenerateRoute: ShikishaRoutes.generateRoute,
       routes: {
-        '/': (context) => const LoginPage(),
+        '/': (context) => const AuthChecker(),
+        '/login': (context) => const LoginPage(),
         '/signUp': (context) => const SignUp(),
         '/home': (context) => const HomeScreen(),
         '/products': (context) => const Products(),
