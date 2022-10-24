@@ -21,18 +21,21 @@ class ProductsRepo extends ChangeNotifier {
 
   void checkSum(bool isAddition) {
     if (isAddition) {
-      _quantity = _quantity + 1;
+      _quantity = checkQuantity(_quantity + 1);
 
       print("incrementing $_quantity");
     } else {
-      _quantity = _quantity - 1;
+      _quantity = checkQuantity(_quantity - 1);
 
       print("decrementing $_quantity");
     }
     notifyListeners();
   }
 
-  // int checkQuantity(int quantity){
-  //   if(quantity)
-  // }
+  int checkQuantity(int quantity) {
+    if (quantity <= 0) {
+      return 0;
+    }
+    return quantity;
+  }
 }
