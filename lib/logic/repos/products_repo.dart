@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:shikisha/logic/models/products_model.dart';
+import 'package:shikisha/logic/repos/cart_repo.dart';
 
 class ProductsRepo extends ChangeNotifier {
   int _quantity = 0;
   int get quantity => _quantity;
+  late CartRepo _cartRepo;
   Future<List<Product>> getAllProducts() async {
     final response =
         await http.get(Uri.parse('https://fakestoreapi.com/products'));
@@ -37,5 +39,14 @@ class ProductsRepo extends ChangeNotifier {
       return 0;
     }
     return quantity;
+  }
+
+  void initProduct(CartRepo cartRepo) {
+    _cartRepo = cartRepo;
+  }
+
+  void addToCart(Product product) {
+    _cartRepo = CartRepo();
+    _cartRepo.addCartItem(product, _quantity);
   }
 }
