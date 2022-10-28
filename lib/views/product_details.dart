@@ -26,6 +26,8 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     final productState = ref.watch(productProvider);
+    final cart = ref.watch(cartProvider);
+    productState.initProduct(cart);
     ThemeData theme = Theme.of(context);
 
     final product = ModalRoute.of(context)!.settings.arguments as Product;

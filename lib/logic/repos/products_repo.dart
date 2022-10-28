@@ -8,6 +8,8 @@ import 'package:shikisha/logic/repos/cart_repo.dart';
 class ProductsRepo extends ChangeNotifier {
   int _quantity = 0;
   int get quantity => _quantity;
+  int _inCartItems = 0;
+  int get inCartItems => _inCartItems + _quantity;
   late CartRepo _cartRepo;
   Future<List<Product>> getAllProducts() async {
     final response =
@@ -42,6 +44,8 @@ class ProductsRepo extends ChangeNotifier {
   }
 
   void initProduct(CartRepo cartRepo) {
+    _quantity = 0;
+    _inCartItems = 0;
     _cartRepo = cartRepo;
   }
 
