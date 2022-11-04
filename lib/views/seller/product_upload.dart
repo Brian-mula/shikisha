@@ -2,6 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shikisha/logic/models/products_model.dart';
+import 'package:shikisha/logic/providers/products_provider.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
@@ -16,10 +18,13 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+
   final TextEditingController priceController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController idController = TextEditingController();
   final TextEditingController fileController = TextEditingController();
+
   FilePickerResult? result;
   bool isSelected = false;
   PlatformFile? file;
@@ -39,6 +44,7 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
+    final fireFunctions = ref.watch(firebaseProvider);
     ThemeData theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
@@ -80,6 +86,12 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
                   child: Column(
                     children: [
                       CustomeInput(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "title cannot be empty";
+                            }
+                            return null;
+                          },
                           controller: titleController,
                           icon: Icons.title_outlined,
                           labelText: "Name",
@@ -88,6 +100,12 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
                         height: 10,
                       ),
                       CustomeInput(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Price cannot be empty";
+                            }
+                            return null;
+                          },
                           controller: priceController,
                           icon: Icons.currency_bitcoin,
                           labelText: "Price",
@@ -96,9 +114,29 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
                         height: 10,
                       ),
                       CustomeInput(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Description cannot be empty";
+                            }
+                            return null;
+                          },
                           controller: descriptionController,
                           icon: Icons.more,
                           labelText: "Description",
+                          inputType: TextInputType.multiline),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomeInput(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "category cannot be empty";
+                            }
+                            return null;
+                          },
+                          controller: categoryController,
+                          icon: Icons.more,
+                          labelText: "Category",
                           inputType: TextInputType.multiline),
                       const SizedBox(
                         height: 10,
@@ -131,6 +169,12 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
               Column(
                 children: [
                   CustomeInput(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "name cannot be empty";
+                        }
+                        return null;
+                      },
                       controller: nameController,
                       icon: Icons.person,
                       labelText: "Seller's name",
@@ -139,6 +183,12 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
                     height: 10,
                   ),
                   CustomeInput(
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return "name cannot be empty";
+                        }
+                        return null;
+                      },
                       controller: idController,
                       icon: Icons.perm_identity,
                       labelText: "Id number",
@@ -150,8 +200,16 @@ class _ProductUploadState extends ConsumerState<ProductUpload> {
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                               Colors.orange.shade900)),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/product_view');
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          Product product = Product(
+                              title: titleController.text,
+                              price: int.parse(priceController.text),
+                              description: descriptionController.text,
+                              category: categoryController.text,
+                              image: "this image");
+                          await fireFunctions.addNewProduct(product, context);
+                        }
                       },
                       child: TextWidget(
                         text: "Confirm",

@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shikisha/logic/models/products_model.dart';
+import 'package:shikisha/logic/providers/products_provider.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
 class ProductDetails extends ConsumerStatefulWidget {
@@ -24,9 +25,12 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final productState = ref.watch(productProvider);
+    final cart = ref.watch(cartProvider);
+    productState.initProduct(cart);
     ThemeData theme = Theme.of(context);
 
-    final args = ModalRoute.of(context)!.settings.arguments as Product;
+    final product = ModalRoute.of(context)!.settings.arguments as Product;
 
     return Scaffold(
       body: Container(
@@ -41,14 +45,15 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                     borderRadius: BorderRadius.circular(6),
                     color: Colors.blue,
                     image: DecorationImage(
-                        image: NetworkImage(args.image!), fit: BoxFit.cover)),
+                        image: NetworkImage(product.image!),
+                        fit: BoxFit.cover)),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
             TextWidget(
-              text: args.title!,
+              text: product.title!,
               textStyle:
                   theme.textTheme.headline6!.copyWith(color: Colors.black54),
             ),
@@ -58,7 +63,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextWidget(
-                    text: "Ksh. ${args.price!}",
+                    text: "Ksh. ${product.price!}",
                     textStyle: theme.textTheme.headline6!
                         .copyWith(color: Colors.orange.shade800),
                   ),
@@ -113,21 +118,59 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
             Expanded(
                 flex: 1,
                 child: TextWidget(
-                  text: "${args.description}",
-                  textStyle: theme.textTheme.bodyLarge,
+                  text: "${product.description}",
+                  textStyle: theme.textTheme.bodyLarge!
+                      .copyWith(color: Colors.black45),
                 )),
             SizedBox(
-              width: 250,
-              child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.orange.shade800)),
-                  onPressed: () {},
-                  child: TextWidget(
-                    text: "Pay Deposit",
-                    textStyle: theme.textTheme.headline6!
-                        .copyWith(color: Colors.white),
-                  )),
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Colors.orange.shade800)),
+                      onPressed: () {
+                        productState.addToCart(product);
+                      },
+                      child: TextWidget(
+                        text: "Pay Deposit",
+                        textStyle: theme.textTheme.headline6!
+                            .copyWith(color: Colors.white),
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          productState.checkSum(false);
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Icon(
+                            Icons.remove,
+                          ),
+                        ),
+                      ),
+                      TextWidget(
+                        text: productState.quantity.toString(),
+                        textStyle: theme.textTheme.headline6!
+                            .copyWith(color: Colors.orange.shade600),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          productState.checkSum(true);
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Icon(Icons.add),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
