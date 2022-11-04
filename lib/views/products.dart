@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/logic/providers/auth_provider.dart';
 import 'package:shikisha/logic/providers/products_provider.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
@@ -11,10 +12,39 @@ class Products extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController = TextEditingController();
     ThemeData theme = Theme.of(context);
+    final auth = ref.watch(authenticationProvider);
     final products = ref.watch(productsProvider);
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        leading: Container(
+          padding: const EdgeInsets.only(
+            left: 10,
+          ),
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 30,
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                auth.signOutUser();
+                Navigator.pushNamed(context, "/");
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+                size: 30,
+              ))
+        ],
+      ),
       body: Container(
-        padding: const EdgeInsets.only(top: 100, left: 10, right: 10),
+        padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
         child: Column(
           children: [
             Padding(

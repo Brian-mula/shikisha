@@ -6,12 +6,14 @@ class CustomeInput extends StatelessWidget {
   final bool? obScuretext;
   final String labelText;
   final IconData icon;
+  final String? Function(String?)? validator;
   const CustomeInput(
       {super.key,
       required this.controller,
       required this.icon,
       required this.labelText,
       required this.inputType,
+      this.validator,
       this.obScuretext});
 
   @override
@@ -19,6 +21,7 @@ class CustomeInput extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: TextFormField(
+        validator: validator,
         controller: controller,
         keyboardType: inputType,
         obscureText: obScuretext ?? false,

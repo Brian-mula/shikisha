@@ -11,6 +11,11 @@ class SellerProduct {
   Stream get allProducts => _firestore.collection("products").snapshots();
 
   Future<void> addNewProduct(Product product, BuildContext context) async {
+    final snackBar = SnackBar(
+        content: TextWidget(
+      text: "product added successfully",
+      textStyle: Theme.of(context).textTheme.bodySmall,
+    ));
     try {
       await _products.add({
         "name": product.title,
@@ -19,6 +24,8 @@ class SellerProduct {
         "category": product.category,
         "image": product.image,
       });
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.pushNamed(context, '/product_view');
     } on FirebaseException catch (e) {
       await showDialog(
           context: context,
