@@ -25,12 +25,12 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final productState = ref.watch(productProvider);
-    final cart = ref.watch(cartProvider);
-    productState.initProduct(cart);
+    final productState = ref.watch(productsProvider);
+    // final cart = ref.watch(cartProvider);
+    // productState.initProduct(cart);
     ThemeData theme = Theme.of(context);
 
-    final product = ModalRoute.of(context)!.settings.arguments as Product;
+    final product = ModalRoute.of(context)!.settings.arguments as ProductModel;
 
     return Scaffold(
       body: Container(
@@ -45,15 +45,14 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                     borderRadius: BorderRadius.circular(6),
                     color: Colors.blue,
                     image: DecorationImage(
-                        image: NetworkImage(product.image!),
-                        fit: BoxFit.cover)),
+                        image: NetworkImage(product.img), fit: BoxFit.cover)),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
             TextWidget(
-              text: product.title!,
+              text: product.title,
               textStyle:
                   theme.textTheme.headline6!.copyWith(color: Colors.black54),
             ),
@@ -63,7 +62,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextWidget(
-                    text: "Ksh. ${product.price!}",
+                    text: "Ksh. ${product.price}",
                     textStyle: theme.textTheme.headline6!
                         .copyWith(color: Colors.orange.shade800),
                   ),
@@ -118,7 +117,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
             Expanded(
                 flex: 1,
                 child: TextWidget(
-                  text: "${product.description}",
+                  text: product.description,
                   textStyle: theme.textTheme.bodyLarge!
                       .copyWith(color: Colors.black45),
                 )),

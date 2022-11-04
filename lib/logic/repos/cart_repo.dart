@@ -2,9 +2,9 @@ import 'package:shikisha/logic/models/cart_model.dart';
 import 'package:shikisha/logic/models/products_model.dart';
 
 class CartRepo {
-  final Map<int, CartModel> _items = {};
-  Map<int, CartModel> get items => _items;
-  void addCartItem(Product product, int quantity) {
+  final Map<String, CartModel> _items = {};
+  Map<String, CartModel> get items => _items;
+  void addCartItem(ProductModel product, int quantity) {
     int totalQuantity = 0;
     if (_items.containsKey(product.id)) {
       _items.update(product.id!, (value) {
@@ -30,7 +30,7 @@ class CartRepo {
               id: product.id,
               name: product.title,
               price: product.price,
-              img: product.image,
+              img: product.img,
               quantity: quantity,
               isExist: true,
               time: DateTime.now().toString(),

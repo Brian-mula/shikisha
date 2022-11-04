@@ -1,78 +1,51 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProductModel {
-  late List<Product> _products;
-  List<Product> get produxts => _products;
-  ProductModel({required produxts}) {
-    _products = produxts;
-  }
+  String? id;
+  String title;
+  String category;
+  String description;
+  String img;
+  int price;
+  String seller;
+  String phone;
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
-    if (json['products'] != null) {
-      _products = <Product>[];
-      json['products'].forEach((v) {
-        produxts.add(Product.fromJson(v));
-      });
-    }
-  }
-}
-
-class Product {
-  int? id;
-  String? title;
-  num? price;
-  String? description;
-  String? category;
-  String? image;
-  Rating? rating;
-
-  Product(
+  ProductModel(
       {this.id,
-      this.title,
-      this.price,
-      this.description,
-      this.category,
-      this.image,
-      this.rating});
+      required this.title,
+      required this.category,
+      required this.description,
+      required this.img,
+      required this.price,
+      required this.seller,
+      required this.phone});
 
-  Product.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    price = json['price'];
-    description = json['description'];
-    category = json['category'];
-    image = json['image'];
-    rating = json['rating'] != null ? Rating.fromJson(json['rating']) : null;
+  Map<String, dynamic> toSnapshot() {
+    return {
+      'title': title,
+      'category': category,
+      'description': description,
+      'img': img,
+      'price': price,
+      'seller': seller,
+      'phone': phone,
+    };
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['price'] = price;
-    data['description'] = description;
-    data['category'] = category;
-    data['image'] = image;
-    if (rating != null) {
-      data['rating'] = rating!.toJson();
-    }
-    return data;
-  }
-}
+  ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
+      : id = doc.id,
+        title = doc.data()!["title"],
+        category = doc.data()!['category'],
+        price = doc.data()!['price'],
+        description = doc.data()!['description'],
+        img = doc.data()!['image'],
+        seller = doc.data()!['seller'],
+        phone = doc.data()!['phone'];
 
-class Rating {
-  num? rate;
-  int? count;
+  String toJson() => json.encode(toSnapshot());
 
-  Rating({this.rate, this.count});
-
-  Rating.fromJson(Map<String, dynamic> json) {
-    rate = json['rate'];
-    count = json['count'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['rate'] = rate;
-    data['count'] = count;
-    return data;
-  }
+  factory ProductModel.fromJson(String source) =>
+      ProductModel.fromSnapshot(json.decode(source));
 }

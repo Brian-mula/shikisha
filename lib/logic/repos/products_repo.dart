@@ -11,12 +11,12 @@ class ProductsRepo extends ChangeNotifier {
   int _inCartItems = 0;
   int get inCartItems => _inCartItems + _quantity;
   late CartRepo _cartRepo;
-  Future<List<Product>> getAllProducts() async {
+  Future<List<ProductModel>> getAllProducts() async {
     final response =
         await http.get(Uri.parse('https://fakestoreapi.com/products'));
     if (response.statusCode == 200) {
       List jsonRes = json.decode(response.body);
-      return jsonRes.map((product) => Product.fromJson(product)).toList();
+      return jsonRes.map((product) => ProductModel.fromJson(product)).toList();
       // return Product.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load products');
@@ -49,7 +49,7 @@ class ProductsRepo extends ChangeNotifier {
     _cartRepo = cartRepo;
   }
 
-  void addToCart(Product product) {
+  void addToCart(ProductModel product) {
     _cartRepo = CartRepo();
     _cartRepo.addCartItem(product, _quantity);
   }
