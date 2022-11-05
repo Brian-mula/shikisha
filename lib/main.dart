@@ -9,6 +9,7 @@ import 'package:shikisha/views/payments.dart';
 import 'package:shikisha/views/product_details.dart';
 import 'package:shikisha/views/products.dart';
 import 'package:shikisha/views/signup.dart';
+import 'package:shikisha/views/splash_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/splash_screen',
       // onGenerateRoute: ShikishaRoutes.generateRoute,
       routes: {
         '/': (context) => const AuthChecker(),
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         '/products': (context) => const Products(),
         '/product_details': (context) => const ProductDetails(),
         '/cart': (context) => const CartScreen(),
-        '/payments': (context) => const Payments()
+        '/payments': (context) => const Payments(),
+        '/splash_screen': (context) => const SplashScreen()
       },
     );
   }
