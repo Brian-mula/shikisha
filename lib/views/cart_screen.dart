@@ -98,8 +98,12 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange.shade900)),
                     onPressed: () async {
-                      await cart.newOrder(items, auth.currentUser!.uid);
-                      Navigator.pushNamed(context, "/payments");
+                      CartModel? item;
+                      for (item in items) {
+                        item = item;
+                      }
+                      await cart.newOrder(
+                          item!, auth.currentUser!.uid, context);
                     },
                     child: TextWidget(
                       text: "Checkout",
