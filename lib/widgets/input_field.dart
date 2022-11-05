@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomeInput extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType inputType;
   final bool? obScuretext;
   final String labelText;
@@ -9,7 +9,7 @@ class CustomeInput extends StatelessWidget {
   final String? Function(String?)? validator;
   const CustomeInput(
       {super.key,
-      required this.controller,
+      this.controller,
       required this.icon,
       required this.labelText,
       required this.inputType,

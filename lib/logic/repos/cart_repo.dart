@@ -43,13 +43,18 @@ class CartRepo extends ChangeNotifier {
     return total;
   }
 
-  Future<void> newOrder(List<CartModel> items, String? id) async {
+  Future<void> newOrder(
+      CartModel items, String? id, BuildContext context) async {
     try {
       await _orders.doc(id).set({
         "owner": auth.currentUser!.email!,
         "date": DateTime.now(),
-        "items": items
+        "name": items.name,
+        "price": items.price,
+        "image": items.img,
+        "quantity": items.quantity
       });
+      Navigator.pushNamed(context, "/payments");
     } catch (e) {
       print(e.toString());
     }
