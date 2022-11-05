@@ -3,7 +3,7 @@ import 'package:shikisha/logic/models/products_model.dart';
 class CartModel {
   String? id;
   String? name;
-  num? price;
+  int? price;
   String? img;
   int? quantity;
   bool? isExist;

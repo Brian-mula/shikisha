@@ -6,7 +6,7 @@ import 'package:shikisha/logic/models/products_model.dart';
 import 'package:shikisha/logic/repos/cart_repo.dart';
 
 class ProductsRepo extends ChangeNotifier {
-  int _quantity = 0;
+  int _quantity = 1;
   int get quantity => _quantity;
   int _inCartItems = 0;
   int get inCartItems => _inCartItems + _quantity;
@@ -51,6 +51,17 @@ class ProductsRepo extends ChangeNotifier {
 
   void addToCart(ProductModel product) {
     _cartRepo = CartRepo();
-    _cartRepo.addCartItem(product, _quantity);
+    // _cartRepo.addCartItem(product, _quantity);
   }
+
+  // List<CartModel> getItems() {
+  //   _cartRepo = CartRepo();
+
+  //   // return _cartRepo.getCartItems();
+  // }
+
+  // int get totalItems {
+  //   _cartRepo = CartRepo();
+  //   return _cartRepo.totalItems;
+  // }
 }

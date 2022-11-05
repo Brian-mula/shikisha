@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,12 +30,47 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
     // final cart = ref.watch(cartProvider);
     // productState.initProduct(cart);
     ThemeData theme = Theme.of(context);
+    final cart = ref.watch(cartItems);
 
     final product = ModalRoute.of(context)!.settings.arguments as ProductModel;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        automaticallyImplyLeading: false,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, "/products");
+          },
+          child: Container(
+            padding: const EdgeInsets.only(left: 10),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.black54,
+              size: 30,
+            ),
+          ),
+        ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 15, top: 10),
+            child: Badge(
+              badgeContent: TextWidget(
+                text: "8",
+                textStyle:
+                    theme.textTheme.bodyLarge!.copyWith(color: Colors.white),
+              ),
+              child: const Icon(
+                Icons.shopping_cart,
+                color: Colors.black54,
+              ),
+            ),
+          )
+        ],
+      ),
       body: Container(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 100),
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
         child: Column(
           children: [
             Center(
@@ -68,6 +104,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                   ),
                   IconButton(
                       onPressed: () {
+                        // productState.getItems;
                         Navigator.pushNamed(context, '/cart');
                       },
                       icon: Icon(
@@ -131,7 +168,9 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                           backgroundColor: MaterialStateProperty.all(
                               Colors.orange.shade800)),
                       onPressed: () {
-                        productState.addToCart(product);
+                        // productState.addToCart(product);
+                        cart.addToCart(product);
+                        print("added product");
                       },
                       child: TextWidget(
                         text: "Pay Deposit",

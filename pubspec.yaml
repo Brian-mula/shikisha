@@ -48,6 +48,7 @@ dependencies:
   cloud_firestore: ^4.0.2
   firebase_storage: ^11.0.2
   google_sign_in: ^5.4.2
+  badges: ^2.0.3
 
 
 dev_dependencies:
@@ -60,7 +61,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.10.0"
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/shikishika_logo.jpeg"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
