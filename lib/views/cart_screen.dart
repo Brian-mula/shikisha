@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/logic/models/cart_model.dart';
+import 'package:shikisha/logic/providers/products_provider.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
@@ -12,12 +15,17 @@ class CartScreen extends ConsumerStatefulWidget {
 class _CartScreenState extends ConsumerState<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final cart = ref.watch(cartItems);
+    List<CartModel> items = cart.getCartProducts();
+    print("these are items");
+    print(items.length);
     ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange.shade900,
         title: TextWidget(
-          text: "Your Cart",
+          text: auth.currentUser!.email!,
           textStyle: theme.textTheme.headline6!.copyWith(color: Colors.white),
         ),
         centerTitle: true,
@@ -30,7 +38,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
             SizedBox(
               height: 700,
               child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: items.length,
                   itemBuilder: (context, index) => Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         child: ListTile(
@@ -45,12 +53,12 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                     fit: BoxFit.cover)),
                           ),
                           title: TextWidget(
-                            text: "Product Tile",
+                            text: items[index].name!,
                             textStyle: theme.textTheme.headline6!
                                 .copyWith(color: Colors.black45),
                           ),
                           subtitle: TextWidget(
-                            text: "Ksh. 3000",
+                            text: items[index].price.toString(),
                             textStyle: theme.textTheme.headline6!.copyWith(
                                 fontSize: 16, color: Colors.orange.shade900),
                           ),
@@ -66,7 +74,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                   width: 5,
                                 ),
                                 TextWidget(
-                                  text: "4",
+                                  text: items[index].quantity.toString(),
                                   textStyle: theme.textTheme.headline6!
                                       .copyWith(fontSize: 16),
                                 ),
@@ -89,14 +97,17 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.orange.shade900)),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await cart.newOrder(items, auth.currentUser!.uid);
+                      Navigator.pushNamed(context, "/payments");
+                    },
                     child: TextWidget(
                       text: "Checkout",
                       textStyle: theme.textTheme.headline6!
                           .copyWith(color: Colors.white),
                     )),
                 TextWidget(
-                  text: "Ksh. 3000",
+                  text: cart.getTotal().toString(),
                   textStyle: theme.textTheme.headline6,
                 )
               ],

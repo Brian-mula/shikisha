@@ -30,20 +30,6 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(
             height: 10,
           ),
-          Center(
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.red.shade600)),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/product_upload');
-                },
-                child: TextWidget(
-                  text: "Seller",
-                  textStyle:
-                      theme.textTheme.headline6!.copyWith(color: Colors.white),
-                )),
-          ),
         ],
       ),
     );

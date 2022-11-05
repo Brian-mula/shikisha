@@ -13,7 +13,7 @@ class Products extends ConsumerWidget {
     TextEditingController searchController = TextEditingController();
     ThemeData theme = Theme.of(context);
     final auth = ref.watch(authenticationProvider);
-    final products = ref.watch(productsProvider);
+    final products = ref.watch(productProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -78,7 +78,7 @@ class Products extends ConsumerWidget {
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(6),
                               image: DecorationImage(
-                                  image: NetworkImage(product[index].image!),
+                                  image: NetworkImage(product[index].img),
                                   fit: BoxFit.cover)),
                           child: Stack(
                             children: [
@@ -95,12 +95,10 @@ class Products extends ConsumerWidget {
                                       child: Column(
                                         children: [
                                           TextWidget(
-                                            text: product[index]
-                                                        .title!
-                                                        .length >=
+                                            text: product[index].title.length >=
                                                     16
-                                                ? '${product[index].title!.substring(0, 16)}...'
-                                                : product[index].title!,
+                                                ? '${product[index].title.substring(0, 16)}...'
+                                                : product[index].title,
                                             textStyle: theme
                                                 .textTheme.headline6!
                                                 .copyWith(
@@ -117,7 +115,7 @@ class Products extends ConsumerWidget {
                                               children: [
                                                 TextWidget(
                                                   text:
-                                                      "Ksh. ${product[index].price!}",
+                                                      "Ksh. ${product[index].price}",
                                                   textStyle: theme
                                                       .textTheme.bodyLarge!
                                                       .copyWith(
