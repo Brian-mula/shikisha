@@ -31,16 +31,26 @@ class Products extends ConsumerWidget {
           ),
         ),
         actions: [
-          IconButton(
-              onPressed: () async {
-                auth.signOutUser();
-                Navigator.pushNamed(context, "/");
+          TextButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, "/sellerlogin");
               },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.black,
-                size: 30,
+              icon: const Icon(Icons.shopping_basket),
+              label: TextWidget(
+                text: "Want to sell?",
+                textStyle:
+                    theme.textTheme.bodyLarge!.copyWith(color: Colors.black54),
               ))
+          // IconButton(
+          //     onPressed: () async {
+          //       auth.signOutUser();
+          //       Navigator.pushNamed(context, "/");
+          //     },
+          //     icon: const Icon(
+          //       Icons.shopping_basket,
+          //       color: Colors.black,
+          //       size: 30,
+          //     ))
         ],
       ),
       body: Container(
