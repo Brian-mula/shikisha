@@ -5,12 +5,12 @@ class CustomeInput extends StatelessWidget {
   final TextInputType inputType;
   final bool? obScuretext;
   final String labelText;
-  final IconData icon;
+  final IconData? icon;
   final String? Function(String?)? validator;
   const CustomeInput(
       {super.key,
       this.controller,
-      required this.icon,
+      this.icon,
       required this.labelText,
       required this.inputType,
       this.validator,

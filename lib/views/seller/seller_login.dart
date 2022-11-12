@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/logic/providers/auth_provider.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
@@ -17,6 +18,8 @@ class _SellerLoginState extends ConsumerState<SellerLogin> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final auth = ref.watch(authenticationProvider);
+    ThemeData theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -30,6 +33,22 @@ class _SellerLoginState extends ConsumerState<SellerLogin> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const CircleAvatar(
+                radius: 20,
+                backgroundImage:
+                    AssetImage("assets/images/shikishika_logo.jpeg"),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextWidget(
+                text: "Shikisha seller SignUp",
+                textStyle:
+                    theme.textTheme.headline6!.copyWith(color: Colors.black54),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               CustomeInput(
                   controller: emailController,
                   validator: (value) {
@@ -76,9 +95,15 @@ class _SellerLoginState extends ConsumerState<SellerLogin> {
               const SizedBox(
                 height: 20,
               ),
-              Row(children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await auth.signUp(emailController.text,
+                          passwordController.text, context,
+                          phone: phoneController.text);
+                    }
+                  },
                   icon: const Icon(Icons.add),
                   label: const TextWidget(text: "Sign up"),
                 ),

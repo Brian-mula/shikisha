@@ -8,25 +8,51 @@ class ProductsContoller {
   final CollectionReference _products =
       FirebaseFirestore.instance.collection("products");
 
+  final CollectionReference _users =
+      FirebaseFirestore.instance.collection("users");
+
   // !get all products
   Future<List<ProductModel>> get allProducts async {
-    // return _products.snapshots().map((snapshot) {
-    //   return snapshot.docs.map((doc) {
-    //     return ProductModel.fromSnapshot(doc);
-    //   }).toList();
-    // });
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await _firestore.collection("products").get();
-    return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+    QuerySnapshot<Map<String, dynamic>> productSnap =
+        await _firestore.collectionGroup("userproducts").get();
+    return productSnap.docs
+        .map((doc) => ProductModel.fromSnapshot(doc))
+        .toList();
+    // QuerySnapshot<Map<String, dynamic>> snapshot =
+    //     await _firestore.collection("products").get();
+    // return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+    // QuerySnapshot<Map<String, dynamic>> usersnapshot =
+    //     await _firestore.collection("users").get();
+    // List<ProductModel> prodcuts = [];
+    // List<UserModel> users =
+    //     usersnapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList();
+    // for (var user in users) {
+    //   QuerySnapshot<Map<String, dynamic>> snap =
+    //       await _products.doc(user.id).collection("userproducts").get();
+    //   prodcuts =
+    //       snap.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+    // }
+    // return prodcuts;
   }
 
-  Future<List<ProductModel>> userProducts(UserModel user) async {
-    QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-        .collection("products")
-        .where('phone', isEqualTo: user.phone)
-        .get();
-    isExisting = true;
-    return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+  Future<List<ProductModel>> userProducts() async {
+    QuerySnapshot<Map<String, dynamic>> usersnapshot =
+        await _firestore.collection("users").get();
+    List<ProductModel> prodcuts = [];
+    List<UserModel> users =
+        usersnapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList();
+    for (var user in users) {
+      QuerySnapshot<Map<String, dynamic>> snap =
+          await _products.doc(user.id).collection("userproducts").get();
+      prodcuts =
+          snap.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+    }
+    // QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
+    //     .collection("products")
+    //     .where('phone', isEqualTo: user.phone)
+    //     .get();
+    // isExisting = true;
+    return prodcuts;
   }
 
   // ! add a product

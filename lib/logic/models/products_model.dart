@@ -7,26 +7,29 @@ class ProductModel {
   String title;
   String category;
   String description;
+  bool isVerified;
   String img;
   int price;
-  String seller;
-  String phone;
+  String? seller;
+  String? phone;
 
   ProductModel(
       {this.id,
+      required this.isVerified,
       required this.title,
       required this.category,
       required this.description,
       required this.img,
       required this.price,
-      required this.seller,
-      required this.phone});
+      this.seller,
+      this.phone});
 
   Map<String, dynamic> toSnapshot() {
     return {
       'title': title,
       'category': category,
       'description': description,
+      'isVerified': isVerified,
       'img': img,
       'price': price,
       'seller': seller,
@@ -40,6 +43,7 @@ class ProductModel {
         category = doc.data()!['category'],
         price = doc.data()!['price'],
         description = doc.data()!['description'],
+        isVerified = doc.data()!['isVerified'] ?? false,
         img = doc.data()!['image'],
         seller = doc.data()!['seller'],
         phone = doc.data()!['phone'];
