@@ -3,17 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
-class SellerLogin extends ConsumerStatefulWidget {
-  const SellerLogin({super.key});
+class SellerSignIn extends ConsumerStatefulWidget {
+  const SellerSignIn({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SellerLoginState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SellerSignInState();
 }
 
-class _SellerLoginState extends ConsumerState<SellerLogin> {
+class _SellerSignInState extends ConsumerState<SellerSignIn> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -44,17 +43,6 @@ class _SellerLoginState extends ConsumerState<SellerLogin> {
               const SizedBox(
                 height: 25,
               ),
-              CustomeInput(
-                  controller: phoneController,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return "phone cannot be empty";
-                    }
-                    return null;
-                  },
-                  icon: Icons.phone,
-                  labelText: "Phone",
-                  inputType: TextInputType.phone),
               const SizedBox(
                 height: 25,
               ),
@@ -84,9 +72,9 @@ class _SellerLoginState extends ConsumerState<SellerLogin> {
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/sellersignin");
+                      Navigator.pushNamed(context, "/sellerlogin");
                     },
-                    child: const TextWidget(text: "Alread have account?"))
+                    child: const TextWidget(text: "Don't have account?"))
               ])
             ],
           ),
