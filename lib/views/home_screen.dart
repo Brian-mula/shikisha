@@ -22,7 +22,7 @@ class HomeScreen extends ConsumerWidget {
                   Navigator.pushNamed(context, "/products");
                 },
                 child: TextWidget(
-                  text: "Buyer",
+                  text: "Shikisha market",
                   textStyle:
                       theme.textTheme.headline6!.copyWith(color: Colors.white),
                 )),

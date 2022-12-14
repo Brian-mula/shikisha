@@ -13,11 +13,16 @@ class ProductsContoller {
 
   // !get all products
   Future<List<ProductModel>> get allProducts async {
-    QuerySnapshot<Map<String, dynamic>> productSnap =
-        await _firestore.collectionGroup("userproducts").get();
+    QuerySnapshot<Map<String, dynamic>> productSnap = await _firestore
+        .collectionGroup("userproducts")
+        .where("isVerified", isEqualTo: true)
+        .orderBy("price", descending: true)
+        .get();
+
     return productSnap.docs
         .map((doc) => ProductModel.fromSnapshot(doc))
         .toList();
+
     // QuerySnapshot<Map<String, dynamic>> snapshot =
     //     await _firestore.collection("products").get();
     // return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();

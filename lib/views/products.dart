@@ -33,7 +33,7 @@ class Products extends ConsumerWidget {
         actions: [
           TextButton.icon(
               onPressed: () {
-                Navigator.pushNamed(context, "/sellerlogin");
+                Navigator.pushNamed(context, "/sellerproducts");
               },
               icon: const Icon(Icons.shopping_basket),
               label: TextWidget(

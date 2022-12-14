@@ -84,7 +84,18 @@ class LoginPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await auth
+                                    .sendVerification(emailController.text);
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                        backgroundColor: Colors.white,
+                                        content: TextWidget(
+                                          text:
+                                              "A reset link has been sent to ${emailController.text}",
+                                          textStyle: theme.textTheme.bodyLarge,
+                                        )));
+                              },
                               child: const TextWidget(text: "Forget password")),
                           TextButton(
                               onPressed: () {

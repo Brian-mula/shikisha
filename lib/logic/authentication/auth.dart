@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shikisha/logic/providers/seller_products_provider.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
 class Authentication {
@@ -55,10 +56,8 @@ class Authentication {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      if (phone!.isNotEmpty) {
-        await _users.add({"name": email, "phone": phone, "isApproved": false});
-        Navigator.pushNamed(context, '/sellerproducts');
-      }
+      await _users.add({"name": email, "isApproved": false});
+
       Navigator.pushNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       await showDialog(
@@ -152,5 +151,9 @@ class Authentication {
                 ],
               ));
     }
+  }
+
+  Future<void> sendVerification(String email) async {
+    await auth.sendPasswordResetEmail(email: email);
   }
 }
