@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shikisha/logic/providers/payment_provider.dart';
 import 'package:shikisha/widgets/input_field.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
@@ -9,6 +10,12 @@ class Payments extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
+    TextEditingController nameController = TextEditingController();
+    final payement = ref.watch(payments);
+    void makePayments() async {
+      await payement.mpesaName(nameController.text, context);
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -49,11 +56,18 @@ class Payments extends ConsumerWidget {
             ),
             Form(
                 child: Column(
-              children: const [
-                CustomeInput(
+              children: [
+                const CustomeInput(
                     icon: Icons.person,
                     labelText: "name",
                     inputType: TextInputType.name),
+                ElevatedButton(
+                    onPressed: makePayments,
+                    child: Text(
+                      "Confirm Name",
+                      style: theme.textTheme.bodyLarge!
+                          .copyWith(color: Colors.white),
+                    ))
               ],
             )),
             const Spacer(),
