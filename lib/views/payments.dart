@@ -47,10 +47,15 @@ class Payments extends ConsumerWidget {
             const SizedBox(
               height: 40,
             ),
-            const CustomeInput(
-                icon: Icons.person,
-                labelText: "name",
-                inputType: TextInputType.name),
+            Form(
+                child: Column(
+              children: const [
+                CustomeInput(
+                    icon: Icons.person,
+                    labelText: "name",
+                    inputType: TextInputType.name),
+              ],
+            )),
             const Spacer(),
             ElevatedButton.icon(
                 style: ButtonStyle(
