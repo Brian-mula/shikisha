@@ -57,7 +57,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
             margin: const EdgeInsets.only(right: 15, top: 10),
             child: Badge(
               badgeContent: TextWidget(
-                text: "8",
+                text: cart.getCartItemList().toString(),
                 textStyle:
                     theme.textTheme.bodyLarge!.copyWith(color: Colors.white),
               ),
@@ -173,7 +173,7 @@ class _ProductDetailsState extends ConsumerState<ProductDetails> {
                         print("added product");
                       },
                       child: TextWidget(
-                        text: "Pay Deposit",
+                        text: "Add to Cart",
                         textStyle: theme.textTheme.headline6!
                             .copyWith(color: Colors.white),
                       )),
