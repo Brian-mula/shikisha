@@ -40,17 +40,17 @@ class Products extends ConsumerWidget {
                 text: "Want to sell?",
                 textStyle:
                     theme.textTheme.bodyLarge!.copyWith(color: Colors.black54),
+              )),
+          IconButton(
+              onPressed: () async {
+                auth.signOutUser();
+                Navigator.pushNamed(context, "/");
+              },
+              icon: const Icon(
+                Icons.arrow_right_alt_outlined,
+                color: Colors.black,
+                size: 30,
               ))
-          // IconButton(
-          //     onPressed: () async {
-          //       auth.signOutUser();
-          //       Navigator.pushNamed(context, "/");
-          //     },
-          //     icon: const Icon(
-          //       Icons.shopping_basket,
-          //       color: Colors.black,
-          //       size: 30,
-          //     ))
         ],
       ),
       body: Container(

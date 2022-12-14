@@ -7,47 +7,52 @@ class Welcome extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
-    return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/welcome.jpg"),
-              fit: BoxFit.cover)),
-      child: Scaffold(
-        body: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 40),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        width: double.maxFinite,
+        height: double.maxFinite,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/welcome.jpg"),
+                fit: BoxFit.cover)),
+        padding: const EdgeInsets.only(left: 0, right: 0),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 250),
+              child: Text(
+                "Welcome to Shikisha",
+                style: theme.textTheme.headline3!.copyWith(color: Colors.white),
+              ),
+            ),
+            Text(
+              "Market",
+              style: theme.textTheme.headline3!.copyWith(color: Colors.white),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              "You can buy and sell second hand goods",
+              style: theme.textTheme.bodyLarge!
+                  .copyWith(color: Colors.white, fontSize: 18),
+            ),
+            const Spacer(),
+            ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.orange.shade600),
+                    elevation: MaterialStateProperty.all(0.0)),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/home");
+                },
                 child: Text(
-                  "Welcome to Shikisha Market",
+                  "Get started",
                   style:
-                      theme.textTheme.headline4!.copyWith(color: Colors.white),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                "You can buy and sell second hand goods",
-                style:
-                    theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.orange.shade600)),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/home");
-                  },
-                  child: Text(
-                    "Get started",
-                    style: theme.textTheme.bodyLarge!
-                        .copyWith(color: Colors.white),
-                  ))
-            ],
-          ),
+                      theme.textTheme.bodyLarge!.copyWith(color: Colors.white),
+                ))
+          ],
         ),
       ),
     );

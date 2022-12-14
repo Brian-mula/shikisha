@@ -20,8 +20,7 @@ class LoginPage extends ConsumerWidget {
         height: double.maxFinite,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(
-                    'https://cdn.pixabay.com/photo/2018/01/21/19/57/tree-3097419__340.jpg'),
+                image: AssetImage("assets/images/login.avif"),
                 fit: BoxFit.cover)),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -31,10 +30,15 @@ class LoginPage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextWidget(
-                  text: "Login",
-                  textStyle:
-                      theme.textTheme.headline3!.copyWith(color: Colors.white),
+                Center(
+                  child: TextWidget(
+                    text: "Login",
+                    textStyle: theme.textTheme.headline3!
+                        .copyWith(color: Colors.white),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 TransparentContainer(
                     widget: Padding(
@@ -43,8 +47,7 @@ class LoginPage extends ConsumerWidget {
                     children: [
                       const CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2017/04/06/19/34/girl-2209147__340.jpg"),
+                        backgroundImage: AssetImage("assets/images/man.png"),
                       ),
                       const SizedBox(
                         height: 13,
