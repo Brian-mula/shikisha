@@ -31,13 +31,23 @@ class Products extends ConsumerWidget {
           ),
         ),
         actions: [
+          TextButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, "/sellerproducts");
+              },
+              icon: const Icon(Icons.shopping_basket),
+              label: TextWidget(
+                text: "Want to sell?",
+                textStyle:
+                    theme.textTheme.bodyLarge!.copyWith(color: Colors.black54),
+              )),
           IconButton(
               onPressed: () async {
                 auth.signOutUser();
                 Navigator.pushNamed(context, "/");
               },
               icon: const Icon(
-                Icons.logout,
+                Icons.arrow_right_alt_outlined,
                 color: Colors.black,
                 size: 30,
               ))

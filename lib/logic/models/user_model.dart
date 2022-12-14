@@ -6,21 +6,23 @@ class UserModel {
   String id;
   String name;
   String phone;
+  bool isApproved;
 
-  UserModel({required this.name, required this.phone, required this.id});
+  UserModel(
+      {required this.name,
+      required this.phone,
+      required this.id,
+      required this.isApproved});
 
   Map<String, dynamic> toSnapshot() {
-    return {
-      "id": id,
-      'name': name,
-      'phone': phone,
-    };
+    return {"id": id, 'name': name, 'phone': phone, "isApproved": isApproved};
   }
 
   UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc)
       : id = doc.id,
-        name = doc.data()!['name'],
-        phone = doc.data()!['phone'];
+        name = doc.data()!['email'] ?? "email",
+        phone = doc.data()!['phone'],
+        isApproved = doc.data()!['isApproved'] ?? false;
 
   String toJson() => json.encode(toSnapshot());
 

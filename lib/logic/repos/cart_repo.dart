@@ -43,6 +43,13 @@ class CartRepo extends ChangeNotifier {
     return total;
   }
 
+  int getCartItemList() {
+    int totalItems = 0;
+    totalItems += cartItems.length;
+    // notifyListeners();
+    return totalItems;
+  }
+
   Future<void> newOrder(
       CartModel items, String? id, BuildContext context) async {
     try {

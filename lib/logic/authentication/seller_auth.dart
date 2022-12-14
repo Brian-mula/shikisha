@@ -2,10 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shikisha/logic/providers/seller_products_provider.dart';
 import 'package:shikisha/widgets/text_widget.dart';
 
-class Authentication {
+class SellerAuthentication {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final CollectionReference _users =
@@ -51,13 +50,12 @@ class Authentication {
   }
 
   // !signup with email and password
-  Future<void> signUp(String email, String password, BuildContext context,
-      {String? phone}) async {
+  Future<void> signUp(
+      String email, String password, BuildContext context, String phone) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await _users.add({"name": email, "isApproved": false});
-
+      await _users.add({"name": email, "phone": phone});
       Navigator.pushNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       await showDialog(
@@ -151,9 +149,5 @@ class Authentication {
                 ],
               ));
     }
-  }
-
-  Future<void> sendVerification(String email) async {
-    await auth.sendPasswordResetEmail(email: email);
   }
 }

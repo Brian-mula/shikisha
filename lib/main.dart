@@ -8,8 +8,12 @@ import 'package:shikisha/views/login_page.dart';
 import 'package:shikisha/views/payments.dart';
 import 'package:shikisha/views/product_details.dart';
 import 'package:shikisha/views/products.dart';
+import 'package:shikisha/views/seller/seller_login.dart';
+import 'package:shikisha/views/seller/seller_products.dart';
+import 'package:shikisha/views/seller/seller_signin.dart';
 import 'package:shikisha/views/signup.dart';
 import 'package:shikisha/views/splash_screen.dart';
+import 'package:shikisha/views/welcome.dart';
 
 import 'firebase_options.dart';
 
@@ -44,7 +48,11 @@ class MyApp extends StatelessWidget {
         '/product_details': (context) => const ProductDetails(),
         '/cart': (context) => const CartScreen(),
         '/payments': (context) => const Payments(),
-        '/splash_screen': (context) => const SplashScreen()
+        '/splash_screen': (context) => const SplashScreen(),
+        '/sellerlogin': (context) => const SellerLogin(),
+        '/sellersignin': (context) => const SellerSignIn(),
+        '/sellerproducts': (context) => const SellerProducts(),
+        '/welcome': (context) => const Welcome()
       },
     );
   }
